@@ -27,7 +27,7 @@ describe('Signup & Login', () => {
     })
 
     it('Test Valid Login & Mock Popular Tags', () => {
-        cy.intercept('GET', '**/*.realworld.io/api/tags', { fixture: 'popularTags.json'}).as('login');
+        cy.intercept('GET', '**/*.realworld.io/api/tags', { fixture: 'popularTags.json'});
         cy.visit('/');
         cy.get('.nav-link').contains('Sign in').click();
         cy.get('[placeholder="Email"]').type(email);
@@ -42,6 +42,12 @@ describe('Signup & Login', () => {
     })
 
     it('Mock Global Feed data', () => {
+        cy.intercept('GET', '**/api/articles*');
+        cy.visit('/');
+        cy.get('.nav-link').contains('Sign in').click();
+        cy.get('[placeholder="Email"]').type(email);
+        cy.get('[placeholder="Password"]').type(password);
+        cy.get('button').contains('Sign in').click();
 
     })
 })
